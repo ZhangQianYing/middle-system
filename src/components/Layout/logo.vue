@@ -2,9 +2,7 @@
   <div class="logo">
     <transition name="fade">
       <span v-if="isCollapse" class="logo_title is-bold is-text" key="0">
-        <template>
-          中台
-        </template>
+        <template>中台</template>
       </span>
     </transition>
     <transition-group name="fade">
@@ -18,17 +16,15 @@
 
 <script>
 export default {
-  name: 'logo',
+  name: "logo",
   data() {
-    return {}
+    return {};
   },
-  props: ['isCollapse'],
+  props: ["isCollapse"],
   created() {},
-  computed: {
-
-  },
+  computed: {},
   methods: {}
-}
+};
 </script>
 
 <style scoped="scoped" lang="scss">
@@ -50,16 +46,16 @@ export default {
   width: calc(100% - 1px);
   height: 50px;
   line-height: 50px;
-  background: #473C8B;
+  background: #473c8b;
   color: #fdfdfd;
   text-align: center;
   font-size: 20px;
   font-weight: 600;
   overflow: hidden;
-//   box-sizing: border-box;
+  //   box-sizing: border-box;
 }
 .logo_title {
-//   padding: 0 3px 0 0;
+  //   padding: 0 3px 0 0;
   color: #42b983;
   font-size: 19px;
   &.is-bold {

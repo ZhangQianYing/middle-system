@@ -3,95 +3,95 @@
     <div class="login-info text-white animated fadeInLeft">
       <!-- <div class="logo" style="margin-top:-426px">
           <img src="../../assets/images/home/logo.png" width="160px" height="160px" alt="logo" style="vertical-align: middle;" />
-      </div> -->
+      </div>-->
       <h2 class="login-info-title">{{$global.title.info.title}}</h2>
       <ul class="login-info-list">
         <li class="login-info-item" v-for="(item,index) of $global.title.info.list" :key="index">
-          <i class="el-icon-check"></i>&nbsp;{{item}}
+          <i class="el-icon-check"></i>
+          &nbsp;{{item}}
         </li>
       </ul>
     </div>
-    <div class="login-border  animated fadeInRight">
+    <div class="login-border animated fadeInRight">
       <div class="login-main">
-        <h4 class="login-title">登录{{$global.title.title}}
-        </h4>
+        <h4 class="login-title">登录{{$global.title.title}}</h4>
         <el-tabs v-model="activeName">
           <el-tab-pane label="用户密码" name="user">
-            <userLogin @loginUp='loginUp'></userLogin>
+            <userLogin @loginUp="loginUp"></userLogin>
           </el-tab-pane>
           <el-tab-pane label="短信验证码" name="code">
-            <codeLogin @loginUp='loginUp'></codeLogin>
+            <codeLogin @loginUp="loginUp"></codeLogin>
           </el-tab-pane>
         </el-tabs>
       </div>
     </div>
-
   </div>
 </template>
 <script>
-import userLogin from './userlogin'
-import codeLogin from './codelogin'
-import axios from '../../utils/axios'
-import lib from '../../utils/lib'
+import userLogin from "./userlogin";
+import codeLogin from "./codelogin";
+import axios from "../../utils/axios";
+import lib from "../../utils/lib";
 export default {
-  	name: 'login',
-  	components: {
-    	userLogin,
-    	codeLogin
-  	},
-  	data() {
-    	return {
-      		activeName: 'user'
-    	}
-  	},
-  	created() {
-		axios.ajax({ // 检测登录状态
-			url: '/auth/token/check',
-			success: res => {
-				if(res.data.is_valid) {
-					this.$router.push('/')
-				}
-			}
-		})
-	},
-  	mounted() {},
-  	computed: {
-    
-  	},
-  	props: [],
-  	methods: {
-	  	loginUp(item,code) {
-			axios.ajax({
-				url: '/auth/token/get',
-				data: item,
-				success: res => {
-					if(res.status === 0) {
-						this.$notify({
-							title: '提示',
-							message: res.msg,
-							type: 'success'
-						});
-						this.$cookies.set(lib.name, res.data.access_token) 
-						setTimeout(() => { this.$router.push({ path: '/'}) },500)
-						axios.ajax({
-							type: 'POST',
-							url: '/auth/user',
-							success: res => {
-								localStorage.setItem(lib.name, JSON.stringify(res.data));
-							}
-						})
-					} else {
-						this.$notify({
-							title: '提示',
-							message: res.msg,
-							type: 'error'
-						});
-					}
-				}
-			}) 
-	  	},
-  	}
-}
+  name: "login",
+  components: {
+    userLogin,
+    codeLogin
+  },
+  data() {
+    return {
+      activeName: "user"
+    };
+  },
+  created() {
+    axios.ajax({
+      // 检测登录状态
+      url: "/auth/token/check",
+      success: res => {
+        if (res.data.is_valid) {
+          this.$router.push("/");
+        }
+      }
+    });
+  },
+  mounted() {},
+  computed: {},
+  props: [],
+  methods: {
+    loginUp(item, code) {
+      axios.ajax({
+        url: "/auth/token/get",
+        data: item,
+        success: res => {
+          if (res.status === 0) {
+            this.$notify({
+              title: "提示",
+              message: res.msg,
+              type: "success"
+            });
+            this.$cookies.set(lib.name, res.data.access_token);
+            setTimeout(() => {
+              this.$router.push({ path: "/" });
+            }, 500);
+            axios.ajax({
+              type: "POST",
+              url: "/auth/user",
+              success: res => {
+                localStorage.setItem(lib.name, JSON.stringify(res.data));
+              }
+            });
+          } else {
+            this.$notify({
+              title: "提示",
+              message: res.msg,
+              type: "error"
+            });
+          }
+        }
+      });
+    }
+  }
+};
 </script>
 
 <style lang="scss">
@@ -116,14 +116,14 @@ export default {
   background-size: cover;
 }
 .login-info {
-  	padding-left: 60px;
+  padding-left: 60px;
 }
 .login-info-title {
-	color: #fff;
-  	line-height: 90px;
+  color: #fff;
+  line-height: 90px;
 }
 .login-info-item {
-	color: #fff;
+  color: #fff;
   font-size: 14px;
 }
 .login-border {

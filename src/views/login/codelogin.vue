@@ -1,5 +1,12 @@
 <template>
-  <el-form class="login-form" status-icon :rules="loginRules" ref="loginForm" :model="loginForm" label-width="0">
+  <el-form
+    class="login-form"
+    status-icon
+    :rules="loginRules"
+    ref="loginForm"
+    :model="loginForm"
+    label-width="0"
+  >
     <el-form-item prop="phone">
       <el-input size="small" v-model="loginForm.phone" auto-complete="off" placeholder="请输入手机号码">
         <i slot="prefix" class="iconfont icon-zh-zhanghao"></i>
@@ -7,7 +14,7 @@
     </el-form-item>
     <el-form-item prop="code">
       <el-input size="small" v-model="loginForm.code" auto-complete="off" placeholder="请输入验证码">
-        <i slot="prefix" class="iconfont icon-zh-yanzhengma yanzhengma" style=""></i>
+        <i slot="prefix" class="iconfont icon-zh-yanzhengma yanzhengma" style></i>
         <template slot="append">
           <span @click="handleSend" class="msg-text" :class="[{display:msgKey}]">{{msgText}}</span>
         </template>
@@ -20,93 +27,91 @@
 </template>
 
 <script>
-const MSGINIT = '发送验证码'
-const MSGERROR = '验证码发送失败'
-const MSGSCUCCESS = '${time}秒后重发'
-const MSGTIME = 60
-import { isvalidatemobile } from '@/utils/validate'
+const MSGINIT = "发送验证码";
+const MSGERROR = "验证码发送失败";
+const MSGSCUCCESS = "${time}秒后重发";
+const MSGTIME = 60;
+import { isvalidatemobile } from "@/utils/validate";
 export default {
-  name: 'codelogin',
+  name: "codelogin",
   data() {
     const validatePhone = (rule, value, callback) => {
       if (isvalidatemobile(value)[0]) {
-        callback(new Error(isvalidatemobile(value)[1]))
+        callback(new Error(isvalidatemobile(value)[1]));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     const validateCode = (rule, value, callback) => {
       if (value.length !== 4) {
-        callback(new Error('请输入4位数的验证码'))
+        callback(new Error("请输入4位数的验证码"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     return {
       msgText: MSGINIT,
       msgTime: MSGTIME,
       msgKey: false,
       loginForm: {
-        phone: '',
-        code: ''
+        phone: "",
+        code: ""
       },
       loginRules: {
-        phone: [{ required: true, trigger: 'blur', validator: validatePhone }],
-        code: [{ required: true, trigger: 'blur', validator: validateCode }]
+        phone: [{ required: true, trigger: "blur", validator: validatePhone }],
+        code: [{ required: true, trigger: "blur", validator: validateCode }]
       }
-    }
+    };
   },
   created() {},
   mounted() {},
-  computed: {
-  },
+  computed: {},
   props: [],
   methods: {
     handleSend() {
       if (this.msgKey) {
-          return
+        return;
       } else {
         //   先发送请求，获取验证码， 验证码发送成功后倒计时开始
-          this.getCode()
+        this.getCode();
       }
-      
     },
 
     getCode() {
-        this.msgText = MSGSCUCCESS.replace('${time}', this.msgTime)
-        this.msgKey = true
-        const time = setInterval(() => {
-            this.msgTime--
-            this.msgText = MSGSCUCCESS.replace('${time}', this.msgTime)
-            if (this.msgTime === 0) {
-            this.msgTime = MSGTIME
-            this.msgText = MSGINIT
-            this.msgKey = false
-            clearInterval(time)
-            }
-        }, 1000)
+      this.msgText = MSGSCUCCESS.replace("${time}", this.msgTime);
+      this.msgKey = true;
+      const time = setInterval(() => {
+        this.msgTime--;
+        this.msgText = MSGSCUCCESS.replace("${time}", this.msgTime);
+        if (this.msgTime === 0) {
+          this.msgTime = MSGTIME;
+          this.msgText = MSGINIT;
+          this.msgKey = false;
+          clearInterval(time);
+        }
+      }, 1000);
     },
 
     handleLogin() {
-        this.$refs.loginForm.validate(valid => {
-            if(valid) {
-                this.$emit('loginUp',this.loginForm,false)
-            } else {
-                this.$message({
-                    showClose: true,
-                    message: '手机号或密码填写不完整',
-                    type: 'warning'
-                });
-            }
-        })
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.$emit("loginUp", this.loginForm, false);
+        } else {
+          this.$message({
+            showClose: true,
+            message: "手机号或密码填写不完整",
+            type: "warning"
+          });
+        }
+      });
     }
   }
-}
+};
 </script>
 
 <style>
-.yanzhengma{
-  display:block;
+.yanzhengma {
+  display: block;
   margin-top: 8px;
 }
 .msg-text {
@@ -119,10 +124,10 @@ export default {
 .msg-text.display {
   color: #ccc;
 }
-.is-success .el-input__inner{
-    border-color: #67c23a!important;
+.is-success .el-input__inner {
+  border-color: #67c23a !important;
 }
-.is-success .el-input__suffix{
-    color: #67c23a!important;
+.is-success .el-input__suffix {
+  color: #67c23a !important;
 }
 </style>
