@@ -1,0 +1,88 @@
+/*! minireset.css v0.0.2 | MIT License | github.com/jgthms/minireset.css */
+
+html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+ul {
+    list-style: none;
+}
+
+button, input, select, textarea {
+    margin: 0;
+}
+
+img, embed, object, audio, video {
+    height: auto;
+    max-width: 100%;
+}
+
+iframe {
+    border: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td, th {
+    padding: 0;
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+.el-aside {
+    overflow: hidden;
+}
+
+.el-container {
+    height: 100%;
+}
+
+.el-main {
+    overflow: hidden;
+}
+
+.el-main, .el-header {
+    padding: 0;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.15s;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.15s;
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+    position: absolute;
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+.comp-shadow {
+    box-shadow: 0 2px 18px rgba(145, 171, 213, 0.5);
+}
+
+.comp-box {
+    padding: 8px 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 18px rgba(145, 171, 213, 0.5);
+}
