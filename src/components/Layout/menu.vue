@@ -10,7 +10,7 @@
       text-color="#fff"
       active-text-color="#fff"
       style="height: 100%"
-      :unique-opened="true"
+      :unique-opened="false"
       :collapse="isCollapse"
     >
       <comp-navmenu v-for="item in routes" :key="item.name" :nav-data="item"></comp-navmenu>
@@ -43,7 +43,11 @@ export default {
   },
   computed: {
     defaultActive() {
-      return this.$route.fullPath;
+      if(this.$route.meta.fath) {
+        return '/' + this.$route.meta.fath
+      } else {
+        return this.$route.fullPath;
+      }
     }
   }
 };

@@ -9,14 +9,15 @@ import './assets/css/index.css'  // 清除默认样式
 import './assets/css/icon.css'
 import axios from '@/utils/axios'
 import VueCookies from 'vue-cookies'
-
+import './utils/download'
+// import VueUeditorWrap from 'vue-ueditor-wrap'
 
 Vue.use(VueCookies)
 Vue.prototype.$global = global
 Vue.config.productionTip = false
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'mini', zIndex: 3000 });
 Vue.prototype.axios = axios
-
+// Vue.component('vue-ueditor-wrap', VueUeditorWrap)
 new Vue({
   router,
   store,

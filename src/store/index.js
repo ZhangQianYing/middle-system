@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    routerPathList: ['home','commodityExamine']
+    routerPathList: ['home','commodityExamine','commodityLibrary','examineDetails','libraryDetails','outputGateway', 'entryGateway','userSystem','roleSystem','addUser', 'addRole','businessRegister','businessAuth']
   },
   mutations: {
   },
